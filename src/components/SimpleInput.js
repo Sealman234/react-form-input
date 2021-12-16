@@ -7,6 +7,10 @@ const SimpleInput = (props) => {
   const enteredNameIsValid = enteredName.trim() !== '';
   const nameInputIsInvalid = !enteredNameIsValid && enteredNameTouched;
 
+  // setEnteredName and setEnteredNameTouched are the causes of re-rendering
+  let formIsValid = false;
+  if (enteredNameIsValid) formIsValid = true;
+
   const nameInputChangeHandler = (event) => {
     setEnteredName(event.target.value);
   };
@@ -45,7 +49,7 @@ const SimpleInput = (props) => {
         )}
       </div>
       <div className="form-actions">
-        <button type="submit">Submit</button>
+        <button disabled={!formIsValid}>Submit</button>
       </div>
     </form>
   );
